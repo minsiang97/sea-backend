@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import "./src/db/mongoDB";
 import UserRouter from "./src/modules/user/user-router";
+import TransactionRouter from "./src/modules/transactions/transaction-router";
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ app.use(bodyParser.json({ type: "application/json" }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use("/user", UserRouter);
+app.use("/transactions", TransactionRouter);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Express + TypeScript Server");

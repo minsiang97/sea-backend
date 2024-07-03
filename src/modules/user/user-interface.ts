@@ -1,7 +1,5 @@
-import { ObjectId } from "mongoose";
-
 export interface UserSchemaInterface {
-  _id: ObjectId;
+  _id: string;
   email: string;
   passwordHash: string;
   createdAt?: Date;
