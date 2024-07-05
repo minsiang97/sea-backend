@@ -62,13 +62,16 @@ export namespace UserController {
           .json({ message: "Email or password is invalid" });
       }
 
-      const jwtToken = await AuthHelper.generateJwt({ email, id: user._id });
+      const jwtToken = await AuthHelper.generateJwt({
+        email: user.email,
+        id: user._id,
+      });
       const refreshToken = await AuthHelper.generateJwt(
-        { email, id: user._id },
+        { email: user.email, id: user._id },
         true
       );
       const response: LoginResponse = {
-        email,
+        email: user.email,
         token: jwtToken,
         refreshToken,
       };
