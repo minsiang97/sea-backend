@@ -11,7 +11,11 @@ export interface UserRequest {
   password: string;
 }
 
-export interface LoginResponse {
+export interface RefreshTokenResponse {
   email: string;
   token: string;
+}
+
+export interface LoginResponse extends RefreshTokenResponse {
+  refreshToken: string;
 }

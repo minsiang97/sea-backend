@@ -8,8 +8,11 @@ export namespace AuthHelper {
 
   export const SECRET_KEY = process.env.JWT_SECRET_KEY ?? "";
 
-  export const generateJwt = async (params: { email: string; id: string }) => {
-    return jwt.sign(params, SECRET_KEY, SIGN_OPTIONS);
+  export const generateJwt = async (
+    params: { email: string; id: string },
+    expire: boolean = false
+  ) => {
+    return jwt.sign(params, SECRET_KEY, expire ? {} : SIGN_OPTIONS);
   };
 
   export const getJwtTokenFromAuthToken = (authToken: string): string => {
