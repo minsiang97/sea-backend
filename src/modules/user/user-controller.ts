@@ -13,14 +13,15 @@ export namespace UserController {
   export const createUser = async (req: Request, res: Response) => {
     try {
       const { email, password }: UserRequest = req.body;
-      const userExist = await UserModel.findOne({ email });
+      const lowercaseEmail = email.toLowerCase();
+      const userExist = await UserModel.findOne({ email: lowercaseEmail });
       if (userExist) {
         return res.status(400).json({ message: "User already exist" });
       }
 
       const hashedPassword = await UserHelper.hashPassword(password);
       const user = await UserModel.create({
-        email,
+        email: lowercaseEmail,
         passwordHash: hashedPassword,
       });
 
