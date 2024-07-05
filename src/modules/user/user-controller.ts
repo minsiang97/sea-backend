@@ -46,7 +46,9 @@ export namespace UserController {
       const lowercaseEmail = email.toLowerCase();
       const user = await UserModel.findOne({ email: lowercaseEmail });
       if (!user) {
-        return res.status(404).json({ message: "User does not exist" });
+        return res
+          .status(404)
+          .json({ message: "Email or password is invalid" });
       }
 
       const verified = await UserHelper.verifyPassword(
